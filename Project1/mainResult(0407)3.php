@@ -1,6 +1,8 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'root', '', 'g3t02');
+include 'connectionMaker.php';
+
+$conn = get_connection();
 
 if (!$conn) {
     // code...
@@ -16,8 +18,13 @@ mysqli_stmt_bind_result($stmt, $email);
 
 $strToArr1 = [];
 
+$student_info = array();
+
 while (mysqli_stmt_fetch($stmt)) {
     echo $email;
+
+
+
     $findDot = strpos($email, '.');
 //    echo "<br>";
 //    echo $findDot;
@@ -27,13 +34,17 @@ while (mysqli_stmt_fetch($stmt)) {
 
     $intValue = intval($subEmail);
 
-    echo "<br>";
-    echo $intValue;
-    echo "<br>";
+    array_push($student_info,
+        array("email" => $email, "year"=>$intValue));
+//
+//    echo "<br>";
+//    echo $intValue;
+//    echo "<br>";
 }
 
-echo $arr1Length;
 echo $strToArr1;
+
+echo json_encode($student_info);
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
@@ -86,6 +97,7 @@ function getPercentage($num1, $num2)
 <canvas id="myChart" width="100" height="100"></canvas>
 <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
+    
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
