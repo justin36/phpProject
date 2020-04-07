@@ -21,9 +21,6 @@ $strToArr1 = [];
 $student_info = array();
 
 while (mysqli_stmt_fetch($stmt)) {
-    echo $email;
-
-
 
     $findDot = strpos($email, '.');
 //    echo "<br>";
@@ -36,15 +33,33 @@ while (mysqli_stmt_fetch($stmt)) {
 
     array_push($student_info,
         array("email" => $email, "year"=>$intValue));
-//
-//    echo "<br>";
-//    echo $intValue;
-//    echo "<br>";
+
 }
 
-echo $strToArr1;
+$student_group = array(
+);
 
-echo json_encode($student_info);
+for ($i = 0; $i < count($student_info) ; $i+= 1 ){
+    $year = $student_info[$i]['year'];
+    if(!array_key_exists($year, $student_group)){
+        $student_group[$year] = 1;
+    }else{
+        $student_group[$year] += 1;
+    }
+}
+
+$chart_data = array("x" => array(), "y" => array());
+ksort($student_group);
+
+foreach($student_group as $key => $value){
+    array_push($chart_data['x'], $key);
+    array_push($chart_data['y'], $value);
+//    echo $value ;
+}
+// {x:[2014, 2015], y:[250, 240 ...]}
+
+echo json_encode($student_group);
+echo json_encode($chart_data);
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
