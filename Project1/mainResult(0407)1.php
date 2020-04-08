@@ -151,6 +151,8 @@ function getPercentage($num1, $num2)
 </table>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+
+<div style="position:absolute; top:200px; left:10px; width:600px; height:600px;">
 <canvas id="myChart" width="100" height="100"></canvas>
 <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -183,6 +185,6 @@ function getPercentage($num1, $num2)
         }
     });
 </script>
-
+</div>
 </body>
 </html>
