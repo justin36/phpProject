@@ -16,19 +16,13 @@ $stmt = mysqli_prepare($conn, $pQuery);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $email);
 
-$strToArr1 = [];
 
 $student_info = array();
 
 while (mysqli_stmt_fetch($stmt)) {
 
     $findDot = strpos($email, '.');
-//    echo "<br>";
-//    echo $findDot;
-//    echo gettype($findDot);
-
     $subEmail = substr($email, $findDot+1, 4);
-
     $intValue = intval($subEmail);
 
     array_push($student_info,
@@ -39,7 +33,7 @@ while (mysqli_stmt_fetch($stmt)) {
 $student_group = array(
 );
 
-for ($i = 0; $i < count($student_info) ; $i+= 1 ){
+for ($i = 0; $i < count($student_info) ; $i+= 1){
     $year = $student_info[$i]['year'];
     if(!array_key_exists($year, $student_group)){
         $student_group[$year] = 1;
@@ -58,8 +52,8 @@ foreach($student_group as $key => $value){
 }
 // {x:[2014, 2015], y:[250, 240 ...]}
 
-echo json_encode($student_group);
-echo json_encode($chart_data);
+$arr1 = json_encode($chart_data["x"]);
+$arr2 = json_encode($chart_data["y"]);
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
@@ -71,15 +65,13 @@ mysqli_close($conn);
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>mainResult(0406)4</title>
+    <title>mainResult(0407)3</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
 
 <h1>Student Demongraphy</h1>
 <?php
-$school = $_POST['school'];
-echo "<h2>$school</h2>";
 
 function getPercentage($num1, $num2)
 {
@@ -91,42 +83,29 @@ function getPercentage($num1, $num2)
 
 ?>
 
-
-<table border="1">
-    <tr>
-        <th>Total Number of Students</th>
-        <th>Double Degree</th>
-        <th>Percentage</th>
-    </tr>
-    <tr>
-        <?php
-
-        echo "<td> $email</td>";
-        echo "<td> $count2</td>";
-        echo "<td>" . getPercentage($email, $count2) . "</td>" ?>
-    </tr>
-
-</table>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <canvas id="myChart" width="100" height="100"></canvas>
 <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
     
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: ['Total Students', 'Double Degree Students'],
+            labels: <?php echo $arr1 ?>,
             datasets: [{
-                label: '# of Students',
-                data: <?php echo json_encode($json1)?>,
+                label: '# of students',
+                data: <?php echo $arr2 ?>,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
+                    // 'rgba(54, 162, 235, 0.2)',
+                    // 'rgba(255, 206, 86, 0.2)',
+                    // 'rgba(75, 192, 192, 0.2)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)'
+                    // 'rgba(54, 162, 235, 1)',
+                    // 'rgba(255, 206, 86, 1)',
+                    // 'rgba(75, 192, 192, 1)',
                 ],
                 borderWidth: 1
             }]

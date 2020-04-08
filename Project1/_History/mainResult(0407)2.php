@@ -43,7 +43,7 @@ mysqli_close($conn);
 <head>
     <meta charset="utf-8">
     <title>mainResult(0406)4</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="../styles.css" type="text/css">
 </head>
 <body>
 
@@ -84,7 +84,7 @@ function getPercentage($num1, $num2)
 <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['Total Students', 'Double Degree Students'],
             datasets: [{
