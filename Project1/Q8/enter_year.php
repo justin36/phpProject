@@ -113,7 +113,7 @@ $json1[] = $count2;
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>mainResult(0406)4</title>
+    <title>Double Degree</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
@@ -137,7 +137,7 @@ function getPercentage($num1, $num2)
 <table border="1">
     <tr>
         <th>Total Number of Students</th>
-        <th>Double Degree</th>
+        <th>Double Degree Students</th>
         <th>Percentage</th>
     </tr>
     <tr>

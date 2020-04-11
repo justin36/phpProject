@@ -1,8 +1,5 @@
 <?php
-
-include 'connectionMaker.php';
-
-$conn = get_connection();
+$conn = mysqli_connect('localhost', 'root', '', 'g3t02');
 
 if (!$conn) {
     // code...
@@ -65,7 +62,7 @@ mysqli_close($conn);
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>mainResult(0407)3</title>
+    <title>Double Degree</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>

@@ -43,7 +43,7 @@ mysqli_close($conn);
 <head>
     <meta charset="utf-8">
     <title>mainResult(0406)4</title>
-    <link rel="stylesheet" href="../styles.css" type="text/css">
+    <link rel="stylesheet" href="../Q8/styles.css" type="text/css">
 </head>
 <body>
 
